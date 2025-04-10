@@ -1,0 +1,28 @@
+# // Ignorar dependências locais
+node_modules
+npm-debug.log
+
+# // Ignorar arquivos de configuração locais
+# .env
+# .env.local
+# *.env.*
+
+# // Ignorar diretórios de build temporários
+build
+dist
+.cache
+out
+
+# // Ignorar arquivos de controle de versão
+.git
+.gitignore
+
+# // Ignorar IDE e editores
+.vscode
+.idea
+*.swp
+
+# // Ignorar logs e arquivos temporários
+logs
+*.log
+*.tmp
