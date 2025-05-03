@@ -10,11 +10,11 @@ class JornadaEntity {
     @Column({ name: 'horario_entrada', type: 'time', nullable: false })
     horario_entrada!: string;
 
-    @Column({ name: 'horario_almoco_inicio', type: 'time', nullable: false })
-    horario_almoco_inicio!: string;
+    @Column({ name: 'intervalo_inicio', type: 'time', nullable: false })
+    intervalo_inicio!: string;
 
-    @Column({ name: 'horario_almoco_fim', type: 'time', nullable: false })
-    horario_almoco_fim!: string;
+    @Column({ name: 'intervalo_fim', type: 'time', nullable: false })
+    intervalo_fim!: string;
 
     @Column({ name: 'horario_saida', type: 'time', nullable: false })
     horario_saida!: string;

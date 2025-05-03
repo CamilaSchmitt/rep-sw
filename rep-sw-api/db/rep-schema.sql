@@ -1,7 +1,8 @@
 CREATE TABLE departamento
 (
     id_departamento SERIAL PRIMARY KEY,
-    nome VARCHAR(50) NOT NULL
+    nome VARCHAR(50) NOT NULL,
+    dt_criacao DATE NOT NULL
 )
 
 CREATE TABLE jornada
@@ -9,8 +10,8 @@ CREATE TABLE jornada
     id_jornada SERIAL PRIMARY KEY,
     nome VARCHAR(50) NOT NULL,
     horario_entrada TIME NOT NULL,
-    horario_almoco_inicio TIME NOT NULL,
-    horario_almoco_fim TIME NOT NULL,
+    intervalo_inicio TIME NOT NULL,
+    intervalo_fim TIME NOT NULL,
     horario_saida TIME NOT NULL,
     dias_trabalho TEXT[] NOT NULL -- Exemplo: ARRAY['Segunda', 'Terça']
 )

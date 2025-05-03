@@ -33,10 +33,10 @@ class UsuarioEntity {
     senha!: string;
 
     @CreateDateColumn({ name: 'dt_criacao', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    dtCriacao!: Date;
+    dtCriacao_Usuario!: Date;
 
     @CreateDateColumn({ name: 'dt_atualizacao', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    dtAtualizacao!: Date;
+    dtAtualizacao_Usuario!: Date;
 
     @ManyToOne(() => DepartamentoEntity, departamento => departamento.usuarios, { nullable: false })
     departamento!: DepartamentoEntity;

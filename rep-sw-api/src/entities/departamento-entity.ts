@@ -3,6 +3,7 @@ import {
     PrimaryGeneratedColumn,
     Column,
     OneToMany,
+    CreateDateColumn,
 }
     from 'typeorm';
 import UsuarioEntity from './usuario-entity';
@@ -15,6 +16,9 @@ class DepartamentoEntity {
 
     @Column({ name: 'nome', type: 'varchar', nullable: false })
     nome!: string;
+
+    @CreateDateColumn({ name: 'dt_criacao', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
+    dtCriacao_Departamento!: Date;
 
     @OneToMany(() => UsuarioEntity, usuario => usuario.departamento, { nullable: true })
     usuarios?: UsuarioEntity[];

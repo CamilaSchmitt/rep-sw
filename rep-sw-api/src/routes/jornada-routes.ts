@@ -66,10 +66,10 @@ router.get('/:id', jornadaController.getById);
  *               horario_entrada:
  *                 type: string
  *                 example: "08:00:00"
- *               horario_almoco_inicio:
+ *               intervalo_inicio:
  *                 type: string
  *                 example: "12:00:00"
- *               horario_almoco_fim:
+ *               intervalo_fim:
  *                 type: string
  *                 example: "13:00:00"
  *               horario_saida:
@@ -110,10 +110,10 @@ router.post('/', jornadaController.create);
  *               horario_entrada:
  *                 type: string
  *                 example: "08:00:00"
- *               horario_almoco_inicio:
+ *               intervalo_inicio:
  *                 type: string
  *                 example: "12:00:00"
- *               horario_almoco_fim:
+ *               intervalo_fim:
  *                 type: string
  *                 example: "13:00:00"
  *               horario_saida:
@@ -153,10 +153,10 @@ router.put('/:id', jornadaController.replace);
  *               horario_entrada:
  *                 type: string
  *                 example: "08:30:00"
- *               horario_almoco_inicio:
+ *               intervalo_inicio:
  *                 type: string
  *                 example: "12:30:00"
- *               horario_almoco_fim:
+ *               intervalo_fim:
  *                 type: string
  *                 example: "13:30:00"
  *               horario_saida:
