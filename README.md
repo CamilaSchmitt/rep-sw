@@ -14,9 +14,23 @@ A proposta do projeto é o desenvolvimento de uma API para um sistema de Relógi
 
 ## Instalação e Configuração
 1. Clone o repositório:
+`git clone https://github.com/seu-usuario/seu-repositorio.git`
+`cd seu-repositorio`
 2. Instale as dependências:
+`npm start`
 3. Configure o banco de dados no arquivo .env:
+`DB_HOST=localhost
+DB_USER=user
+DB_PASSWORD=password
+DB_NAME=rep-sw-db
+DB_PORT=5432
+
+API_PORT=3002
+
+TOKEN_KEY=ChaveSecreta
+MASTER_PASSWORD=SenhaSecreta`
 4. Inicie o servidor:
+`npm run dev`
 
 ## Documentação
 1. Inicie o servidor localmente:
