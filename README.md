@@ -13,17 +13,23 @@ A proposta do projeto é o desenvolvimento de uma API para um sistema de Relógi
 - Posteman - Para testes.
 
 ## Instalação e Configuração
+
 1. Clone o repositório:
-``bash
+
+```bash
 git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio `
+cd seu-repositorio
+Instale as dependências:
 
-2. Instale as dependências:
-` ```bash
-npm install`
+bash
+Copiar
+Editar
+npm install
+Configure o banco de dados no arquivo .env:
 
-3. Configure o banco de dados no arquivo .env:
-` ```bash
+env
+Copiar
+Editar
 DB_HOST=localhost
 DB_USER=user
 DB_PASSWORD=password
@@ -33,11 +39,13 @@ DB_PORT=5432
 API_PORT=3002
 
 TOKEN_KEY=ChaveSecreta
-MASTER_PASSWORD=SenhaSecreta`
+MASTER_PASSWORD=SenhaSecreta
+Inicie o servidor:
 
-4. Inicie o servidor:
-` ```bash
-npm run dev`
+bash
+Copiar
+Editar
+npm run dev
 
 ## Documentação
 1. Inicie o servidor localmente:
