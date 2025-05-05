@@ -14,13 +14,18 @@ A proposta do projeto é o desenvolvimento de uma API para um sistema de Relógi
 
 ## Instalação e Configuração
 1. Clone o repositório:
+```bash
 git clone https://github.com/seu-usuario/seu-repositorio.git
-cd seu-repositorio `
+cd seu-repositorio
+```
 
 2. Instale as dependências:
+```bash
 npm install
+```
 
 3. Configure o banco de dados no arquivo .env:
+```bash
 DB_HOST=localhost
 DB_USER=user
 DB_PASSWORD=password
@@ -31,13 +36,19 @@ API_PORT=3002
 
 TOKEN_KEY=ChaveSecreta
 MASTER_PASSWORD=SenhaSecreta
+```
 
 4. Inicie o servidor:
+```bash
 npm run dev
+```
 
 ## Documentação
 1. Inicie o servidor localmente:
-2. Acesse a documentação em: http://localhost:3002/docs
+```bash
+npm run dev
+```
+2. Acesse a documentação em: `http://localhost:3002/docs`
 
 ## Endpoints da API
 ### Departamento
