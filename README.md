@@ -10,7 +10,7 @@ A proposta do projeto é o desenvolvimento de uma API para um sistema de Relógi
 - Express – Framework para criação de APIs RESTful.
 - PostgreSQL – Banco de dados relacional.
 - TypeORM – ORM para facilitar o mapeamento entre objetos e tabelas.
-- Posteman - Para testes.
+- Postman - Para testes.
 
 ## Instalação e Configuração
 1. Clone o repositório:
@@ -49,6 +49,11 @@ npm run dev
 npm run dev
 ```
 2. Acesse a documentação em: `http://localhost:3002/docs`
+
+## Teste Postman
+1. Abra o Postman: `https://www.postman.com/`
+2. Importe a coleção de requisições HTTP presentes na pasta /test
+
 
 ## Endpoints da API
 ### Departamento
