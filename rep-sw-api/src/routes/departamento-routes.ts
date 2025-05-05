@@ -40,14 +40,18 @@ router.get('/', departamentoController.getAll);
  *         description: Departamento encontrado
  *         content:
  *           application/json:
- *            schema:
- *             type: array
- *               items:
- *                 type: object
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                 nome:
+ *                   type: string
  *       404:
  *         description: Departamento não encontrado
  */
 router.get('/:id', departamentoController.getById);
+
 
 /**
  * @swagger
