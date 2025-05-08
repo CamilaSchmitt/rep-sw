@@ -80,6 +80,9 @@ npm run dev
 - `PATCH` /usuarios/{id}: Atualiza parcialmente um usuario pelo ID.
 - `DEL` /usuarios/{id}: Deleta um usuario pelo ID.
 
+### Login
+- `POST` /login: Realiza login de um usuário.
+- `POST`/register: Realiza o registro de um usuário.
 
 
 
