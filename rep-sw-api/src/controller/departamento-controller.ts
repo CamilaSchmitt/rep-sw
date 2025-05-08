@@ -1,13 +1,13 @@
 import { Request, Response } from "express";
 import { Repository } from "typeorm";
-import { datasource } from "../config/datasource";
+import { AppDataSource } from "../config/datasource";
 import DepartamentoEntity from "../entities/departamento-entity";
 
 export class DepartamentoController {
     private departamentoRepository: Repository<DepartamentoEntity>;
 
     constructor() {
-        this.departamentoRepository = datasource.getRepository(DepartamentoEntity);
+        this.departamentoRepository = AppDataSource.getRepository(DepartamentoEntity);
     }
 
     getAll = async (req: Request, res: Response): Promise<void> => {

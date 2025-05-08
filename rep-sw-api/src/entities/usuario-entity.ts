@@ -3,12 +3,14 @@ import { Entity,
     Column, 
     CreateDateColumn, 
     Check,   
-    ManyToOne} from "typeorm";
+    ManyToOne,
+    OneToMany} from "typeorm";
 import DepartamentoEntity from "./departamento-entity";
 import JornadaEntity from "./jornada-entity";
+import { SituacaoUsuario } from "../enums/situacao-usuario.enum";
+
 
 @Entity({ name: 'usuario' })
-@Check(`"situacao" IN ('Ativo', 'Inativo', 'Férias', 'Afatado')`) // Restrição para valores válidos
 
 class UsuarioEntity {
     @PrimaryGeneratedColumn({ name: 'id_usuario' })
@@ -20,8 +22,15 @@ class UsuarioEntity {
     @Column({ name: 'cpf', type: 'varchar', length: 11, unique: true, nullable: false })
     cpf!: string;
 
-    @Column({ name: 'situacao', type: 'varchar', length: 20, nullable: false })
-    situacao!: string;
+    @Column({ 
+        name: 'situacao', 
+        type: 'enum', 
+        enum: SituacaoUsuario,
+        enumName: 'situacao_usuario_enum',
+        default: SituacaoUsuario.ATIVO,
+        nullable: false
+    })
+    situacao!: SituacaoUsuario;
 
     @Column({ name: 'telefone', type: 'varchar', length: 15, nullable: false })
     telefone!: string;

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { Repository } from 'typeorm';
-import { datasource } from '../config/datasource';
+import { AppDataSource } from '../config/datasource';
 import UsuarioEntity from '../entities/usuario-entity';
 
 export class UsuarioController {
@@ -8,7 +8,7 @@ export class UsuarioController {
     private usuarioRepository: Repository<UsuarioEntity>;
 
     constructor() {
-        this.usuarioRepository = datasource.getRepository(UsuarioEntity);
+        this.usuarioRepository = AppDataSource.getRepository(UsuarioEntity);
     }
 
     getAll = async (req: Request, res: Response): Promise<void> => {

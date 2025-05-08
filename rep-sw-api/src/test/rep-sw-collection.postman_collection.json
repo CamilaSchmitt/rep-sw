@@ -34,7 +34,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"horario_entrada\": \"08:00:00\",\r\n  \"intervalo_inicio\": \"12:00:00\",\r\n  \"intervalo_fim\": \"13:00:00\",\r\n  \"horario_saida\": \"17:00:00\",\r\n  \"dias_trabalho\": \"Seg, Ter, Qua, Qui, Sex\"\r\n}\r\n",
+							"raw": "{\r\n  \"horario_entrada\": \"08:00:00\",\r\n  \"intervalo_inicio\": \"12:00:00\",\r\n  \"intervalo_fim\": \"13:00:00\",\r\n  \"horario_saida\": \"17:00:00\",\r\n  \"dias_trabalho\": [\"Seg\", \"Ter\", \"Qua\", \"Qui\", \"Sex\"]\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -138,7 +138,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"nome\": \"TI\"\n}",
+							"raw": "{\n  \"horario_entrada\": \"08:00:00\",\n  \"intervalo_inicio\": \"12:00:00\",\n  \"intervalo_fim\": \"13:00:00\",\n  \"horario_saida\": \"17:00:00\",\n  \"dias_trabalho\": \"Seg, Qua, Sex\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -146,18 +146,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/departamentos/:id",
+							"raw": "{{base_url}}/jornadas/:id",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"departamentos",
+								"jornadas",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						},
@@ -187,7 +187,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n  \"nome\": \"Recursos Humanos\"\n}",
+							"raw": "{\n  \"dias_trabalho\": \"Seg, Ter, Qua, Qui, Sex\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -195,18 +195,18 @@
 							}
 						},
 						"url": {
-							"raw": "{{base_url}}/departamentos/:id",
+							"raw": "{{base_url}}/jornadas/:id",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
-								"departamentos",
+								"jornadas",
 								":id"
 							],
 							"variable": [
 								{
 									"key": "id",
-									"value": "1"
+									"value": "2"
 								}
 							]
 						},
@@ -431,6 +431,16 @@
 				{
 					"name": "recuperaUsuarios",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjp0cnVlLCJpZCI6NCwiZW1haWwiOiJmdWxhbm9AZ21haWwuY29tIiwiaWF0IjoxNzQ2NjcwNDM0LCJleHAiOjE3NDY2Nzc2MzR9.DY9RN9CyX_5gAhGRTFSNHw20Lv497JCqof258wvuAq4",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"url": {
@@ -462,7 +472,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Fulano de Tal\",\r\n    \"cpf\": \"00000000000\",\r\n    \"situacao\": \"Ativo\",\r\n    \"telefone\": \"54999999999\",\r\n    \"email\": \"fulano@gmail.com\",\r\n    \"senha\": \"123\",\r\n    \"departamento\": 1,\r\n    \"jornada\": 2\r\n}",
+							"raw": "{\r\n    \"nome\": \"Fulano de Tal\",\r\n    \"cpf\": \"00000000000\",\r\n    \"situacao\": \"Ativo\",\r\n    \"telefone\": \"+5554999999999\",\r\n    \"email\": \"fulano@gmail.com\",\r\n    \"senha\": \"123\",\r\n    \"departamento\": 1,\r\n    \"jornada\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -483,21 +493,11 @@
 						{
 							"name": "novoUsuario",
 							"originalRequest": {
-								"auth": {
-									"type": "bearer",
-									"bearer": [
-										{
-											"key": "token",
-											"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRoIjp0cnVlLCJlbWFpbCI6ImdhYnJpZWxAZ21haWwuY29tIiwiaWF0IjoxNzMwNDkyMDUwLCJleHAiOjE3MzA0OTU2NTB9.cMo9qhwzQhcvEld-LF77jreJ5i3F82U57QyHnOPZloI",
-											"type": "string"
-										}
-									]
-								},
 								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
-									"raw": "{\r\n    \"nome\": \"Fulano de Tal\",\r\n    \"cpf\": \"00000000000\",\r\n    \"situacao\": \"Ativo\",\r\n    \"telefone\": \"54999999999\",\r\n    \"email\": \"fulano@gmail.com\",\r\n    \"senha\": \"123\",\r\n    \"departamento\": 1,\r\n    \"jornada\": 2\r\n}",
+									"raw": "{\r\n    \"nome\": \"Tamila\",\r\n    \"email\": \"tamila@gmail.com\",\r\n    \"senha\": \"12345678\"\r\n}",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -514,10 +514,10 @@
 									]
 								}
 							},
-							"_postman_previewlanguage": "",
-							"header": "",
+							"_postman_previewlanguage": null,
+							"header": null,
 							"cookie": [],
-							"body": ""
+							"body": null
 						}
 					]
 				},
@@ -537,7 +537,9 @@
 							],
 							"variable": [
 								{
-									"key": "id"
+									"key": "id",
+									"value": "1",
+									"type": "string"
 								}
 							]
 						}
@@ -639,6 +641,63 @@
 							]
 						},
 						"description": "This is a PUT request and it is used to overwrite an existing piece of data. For instance, after you create an entity with a POST request, you may want to modify that later. You can do that using a PUT request. You typically identify the entity being updated by including an identifier in the URL (eg. `id=1`).\n\nA successful PUT request typically returns a `200 OK`, `201 Created`, or `204 No Content` response code."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "autenticacao",
+			"item": [
+				{
+					"name": "autenticacao login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"fulano@gmail.com\",\r\n    \"senha\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "autenticacao register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Fulano de Tal\",\r\n    \"cpf\": \"00000000000\",\r\n    \"situacao\": \"Ativo\",\r\n    \"telefone\": \"+5554999999999\",\r\n    \"email\": \"fulano@gmail.com\",\r\n    \"senha\": \"123\",\r\n    \"departamento\": 1,\r\n    \"jornada\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
 					},
 					"response": []
 				}

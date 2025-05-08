@@ -19,8 +19,8 @@ class JornadaEntity {
     @Column({ name: 'horario_saida', type: 'time', nullable: false })
     horario_saida!: string;
 
-    @Column({ name: 'dias_trabalho', type: 'varchar', nullable: false })
-    dias_trabalho!: string; // Exemplo: 'Seg, Ter, Qua'
+    @Column({ type: 'text', array: true, nullable: false })
+    dias_trabalho!: string[]; // Exemplo: ['Seg', 'Ter', 'Qua']
 
     @OneToMany(() => UsuarioEntity, usuario => usuario.jornada, { nullable: true })
     usuarios?: UsuarioEntity[];

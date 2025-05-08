@@ -1,13 +1,13 @@
 import {Request, Response} from 'express';
 import {Repository} from 'typeorm';
-import {datasource} from "../config/datasource";
+import {AppDataSource} from '../config/datasource';
 import JornadaEntity from '../entities/jornada-entity';
 
 export class JornadaController {
     private jornadaRepository: Repository<JornadaEntity>;
 
     constructor() {
-        this.jornadaRepository = datasource.getRepository(JornadaEntity);
+        this.jornadaRepository = AppDataSource.getRepository(JornadaEntity);
     }
 
     getAll = async (req: Request, res: Response): Promise<void> => {
@@ -68,7 +68,7 @@ export class JornadaController {
         if (!existingJornada) {
             res.status(404).send('Jornada não encontrada');
         }else {
-            await this.jornadaRepository.delete(existingJornada);
+            await this.jornadaRepository.delete(jornadaId);
             res.status(204).send();
         }
     };
