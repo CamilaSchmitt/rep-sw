@@ -83,6 +83,8 @@ npm run dev
 ### Login
 - `POST` /login: Realiza login de um usuário.
 - `POST`/register: Realiza o registro de um usuário.
+- `POST` /logout: Realiza o logout do usuário e adiciona o accessToken atual a blacklist.
+- `POST` /refresh: Gera um novo accessToken para o usuário.
 
 
 
