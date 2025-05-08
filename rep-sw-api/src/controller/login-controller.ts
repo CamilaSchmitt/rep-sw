@@ -5,6 +5,8 @@ import Usuario from "../entities/usuario-entity";
 import bcrypt from "bcrypt";
 import { Repository } from "typeorm";
 import { AppDataSource } from "../config/datasource";
+import { addToBlacklist } from "../services/blacklist";
+import { refreshTokens, removeRefreshToken } from "../services/refreshTokens";
 
 dotenv.config();
 
@@ -31,19 +33,31 @@ export class LoginController {
                 return;
             }
     
-            if (!process.env.TOKEN_KEY) {
-                res.status(500).json({ message: "Chave JWT não configurada." });
+            if (!process.env.TOKEN_KEY || !process.env.REFRESH_TOKEN_KEY) {
+                res.status(500).json({ message: "Chaves JWT não configuradas." });
                 return;
             }
     
-            const token = jwt.sign(
+            // Gerar o Access Token com validade curta (15 minutos)
+            const accessToken = jwt.sign(
                 { auth: true, id: usuario.id, email: usuario.email },
-                process.env.TOKEN_KEY,
+                process.env.TOKEN_KEY!,
+                { expiresIn: "15m" }
+            );
+    
+            // Gerar o Refresh Token com validade longa (7 dias)
+            const refreshToken = jwt.sign(
+                { auth: true, id: usuario.id, email: usuario.email },
+                process.env.REFRESH_TOKEN_KEY!,
                 { expiresIn: "2h" }
             );
     
+            // Armazenar o Refresh Token (em memória ou banco de dados, ou Redis)
+            refreshTokens.push(refreshToken);  // Exemplo usando memória
+    
             res.status(200).json({
-                token,
+                accessToken,
+                refreshToken,
                 usuario: {
                     id: usuario.id,
                     nome: usuario.nome,
@@ -55,6 +69,7 @@ export class LoginController {
             res.status(500).json({ message: "Erro interno no servidor." });
         }
     };
+    
 
     public register: RequestHandler = async (req, res): Promise<void> => {
         const { nome, email, senha, cpf, situacao, telefone, departamento, jornada } = req.body;
@@ -86,5 +101,50 @@ export class LoginController {
             res.status(500).json({ message: "Erro interno no servidor." });
         }
     };
+
+    public logout = (req: Request, res: Response) => {
+        const accessToken = req.headers["authorization"]?.split(" ")[1];
+        const { refreshToken } = req.body;
+    
+        if (accessToken) addToBlacklist(accessToken);
+        if (refreshToken) removeRefreshToken(refreshToken);
+    
+        res.status(200).json({ message: "Logout realizado." });
+    };
+    
+    
+    public refresh: RequestHandler = async (req, res): Promise<void> => {
+        const { refreshToken } = req.body;
+      
+        if (!refreshToken) {
+          res.status(400).json({ message: "Refresh token é obrigatório." });
+          return;
+        }
+      
+        if (!process.env.REFRESH_TOKEN_KEY) {
+          res.status(500).json({ message: "Chave de refresh token não configurada." });
+          return;
+        }
+      
+        if (!refreshTokens.includes(refreshToken)) {
+          res.status(403).json({ message: "Refresh token inválido." });
+          return;
+        }
+      
+        try {
+          const payload = jwt.verify(refreshToken, process.env.REFRESH_TOKEN_KEY) as jwt.JwtPayload;
+      
+          const newAccessToken = jwt.sign(
+            { auth: true, id: payload.id, email: payload.email },
+            process.env.TOKEN_KEY!,
+            { expiresIn: "15m" }
+          );
+      
+          res.status(200).json({ accessToken: newAccessToken });
+        } catch (error) {
+          res.status(403).json({ message: "Refresh token inválido ou expirado." });
+        }
+      };
+      
     
 }

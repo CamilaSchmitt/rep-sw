@@ -109,4 +109,43 @@ loginRoutes.post("/login", loginController.doLogin);
  */
 loginRoutes.post("/register", loginController.register);
 
+/**
+ * @swagger
+ * /rep/logout:
+ *   post:
+ *     summary: Realiza o logout de um usuário
+ *     tags: [Autenticação]
+ *     responses:
+ *       200:
+ *         description: Logout bem-sucedido
+ *       401:
+ *         description: Token inválido ou não fornecido
+ */
+loginRoutes.post("/logout", loginController.logout);
+
+/**
+ * @swagger
+ * /rep/refresh:
+ *   post:
+ *     summary: Atualiza o token de acesso
+ *     tags: [Autenticação]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             required:
+ *               - refreshToken
+ *             properties:
+ *               refreshToken:
+ *                 type: string
+ *     responses:
+ *       200:
+ *         description: Token atualizado com sucesso
+ *       401:
+ *         description: Refresh token inválido ou não fornecido
+ */
+loginRoutes.post("/refresh", loginController.refresh);
+
 export default loginRoutes;

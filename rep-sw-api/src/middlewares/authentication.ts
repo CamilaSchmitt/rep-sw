@@ -1,29 +1,39 @@
-import { Request, Response } from "express";
+import { Request, Response, NextFunction, RequestHandler } from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import { isTokenBlacklisted } from "../services/blacklist";
 
 dotenv.config();
 
-class Authentication {
-    async hasAuthentication(req: Request, res: Response, next: () => void) {
-        const bearerHeader = req.headers.authorization;
-        const token = bearerHeader?.split(" ")[1];
+const hasAuthentication: RequestHandler = async (req, res, next) => {
+    const authHeader = req.headers.authorization;
 
-        jwt.verify(
-            token!,
-            process.env.TOKEN_KEY!,
-            function (err: any, decoded: any) {
-                if (err) {
-                    return res.status(500).json({
-                        auth: false,
-                        message: err,
-                    });
-                }
-                req.params.token = token!;
-                next();
-            }
-        );
+    if (!authHeader) {
+        res.status(401).json({ message: "Token não fornecido." });
+        return;
     }
-}
 
-export default new Authentication();
+    const token = authHeader.split(" ")[1];
+
+    if (!process.env.TOKEN_KEY) {
+        res.status(500).json({ message: "Chave de token não configurada." });
+        return;
+    }
+
+    if (isTokenBlacklisted (token)) {
+        res.status(401).json({ message: "Token inválido (logout)." });
+        return;
+    }
+
+    try {
+        const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+        // req.user = decoded; // opcional: você pode guardar o payload do token
+        next();
+    } catch (err) {
+        res.status(401).json({ message: "Token inválido ou expirado." });
+    }
+};
+
+export default {
+    hasAuthentication
+};
