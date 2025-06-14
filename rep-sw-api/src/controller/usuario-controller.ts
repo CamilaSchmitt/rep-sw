@@ -39,7 +39,6 @@ export class UsuarioController {
         }
     }
 
-    // 🚩 GET ALL
     getAll = async (req: Request, res: Response): Promise<void> => {
         const usuarios = await this.usuarioRepository.find();
 
@@ -64,7 +63,6 @@ export class UsuarioController {
         res.status(200).json(usuariosComInfo);
     };
 
-    // 🚩 GET BY ID
     getById = async (req: Request, res: Response): Promise<void> => {
         const usuarioId = parseInt(req.params.id);
         const usuario = await this.usuarioRepository.findOneBy({ id: usuarioId });
@@ -89,7 +87,6 @@ export class UsuarioController {
         });
     };
 
-    // 🚩 CREATE
     create = async (req: Request, res: Response): Promise<void> => {
         const newUsuario = this.usuarioRepository.create(req.body);
 
@@ -102,7 +99,6 @@ export class UsuarioController {
         }
     };
 
-    // 🚩 REPLACE (PUT)
     replace = async (req: Request, res: Response): Promise<void> => {
         const usuarioId = parseInt(req.params.id);
         const existingUsuario = await this.usuarioRepository.findOneBy({ id: usuarioId });
@@ -121,7 +117,6 @@ export class UsuarioController {
         res.status(200).json(updateUsuario);
     };
 
-    // 🚩 UPDATE (PATCH)
     update = async (req: Request, res: Response): Promise<void> => {
         const usuarioId = parseInt(req.params.id);
         const partialUpdate = req.body;
@@ -136,7 +131,6 @@ export class UsuarioController {
         }
     };
 
-    // 🚩 DELETE
     delete = async (req: Request, res: Response): Promise<void> => {
         const usuarioId = parseInt(req.params.id);
         const result = await this.usuarioRepository.delete(usuarioId);
