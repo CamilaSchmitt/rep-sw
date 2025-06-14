@@ -47,9 +47,9 @@ npm run dev
 npm run dev
 ```
 2. Acesse a documentação em: 
-API Principal - `http://localhost:3002/docs`
-API Jornada - `http://localhost:3003/docs`
-API Departamento - `http://localhost:3004/docs`
+- API Principal - `http://localhost:3002/docs`
+- API Jornada - `http://localhost:3003/docs`
+- API Departamento - `http://localhost:3004/docs`
 
 
 
