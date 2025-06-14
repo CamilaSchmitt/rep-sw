@@ -1,8 +1,6 @@
 import express, { json } from "express";
 import cors from "cors";
 
-import jornadasRoutes from "./routes/jornada-routes";
-import departamentosRoutes from "./routes/departamento-routes";
 import usuariosRoutes from "./routes/usuario-routes";
 import loginRoutes from "./routes/login-routes";
 import healthcheckRoute from "./routes/healthcheck-route";
@@ -10,6 +8,10 @@ import healthcheckRoute from "./routes/healthcheck-route";
 import Authentication from "./middlewares/authentication";
 import errorHandler from "./middlewares/error-handler";
 import { setupSwagger } from "./swaggerConfig";
+
+import { jornadaProxy } from "./proxy/jornada-proxy";
+import { departamentoProxy } from "./proxy/departamento-proxy";
+
 
 const app = express();
 app.use(json());
@@ -30,9 +32,14 @@ router.use("/healthcheck", healthcheckRoute);
 // Rotas protegidas
 router.use("/usuarios", Authentication.hasAuthentication, usuariosRoutes);
 
-// Rotas abertas (ou adicionar autenticação se necessário)
-router.use("/jornadas", jornadasRoutes);
-router.use("/departamentos", departamentosRoutes);
+// Proxies para microsserviços
+router.use("/jornadas", Authentication.hasAuthentication, jornadaProxy);
+//router.use("/departamentos", Authentication.hasAuthentication, departamentoProxy);
+
+// Rotas de autenticação
+router.use("/login", loginRoutes);
+
+router.use("/departamentos", Authentication.hasAuthentication, departamentoProxy);
 
 // Swagger + tratamento de erros
 setupSwagger(app);

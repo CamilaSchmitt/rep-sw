@@ -1,17 +1,12 @@
-import { Entity, 
-    PrimaryGeneratedColumn, 
-    Column, 
-    CreateDateColumn, 
-    Check,   
-    ManyToOne,
-    OneToMany} from "typeorm";
-import DepartamentoEntity from "./departamento-entity";
-import JornadaEntity from "./jornada-entity";
+import {
+    Entity,
+    PrimaryGeneratedColumn,
+    Column,
+    CreateDateColumn
+} from "typeorm";
 import { SituacaoUsuario } from "../enums/situacao-usuario.enum";
 
-
 @Entity({ name: 'usuario' })
-
 class UsuarioEntity {
     @PrimaryGeneratedColumn({ name: 'id_usuario' })
     id!: number;
@@ -22,9 +17,9 @@ class UsuarioEntity {
     @Column({ name: 'cpf', type: 'varchar', length: 11, unique: true, nullable: false })
     cpf!: string;
 
-    @Column({ 
-        name: 'situacao', 
-        type: 'enum', 
+    @Column({
+        name: 'situacao',
+        type: 'enum',
         enum: SituacaoUsuario,
         enumName: 'situacao_usuario_enum',
         default: SituacaoUsuario.ATIVO,
@@ -47,11 +42,11 @@ class UsuarioEntity {
     @CreateDateColumn({ name: 'dt_atualizacao', type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     dtAtualizacao_Usuario!: Date;
 
-    @ManyToOne(() => DepartamentoEntity, departamento => departamento.usuarios, { nullable: false })
-    departamento!: DepartamentoEntity;
+    @Column({ name: 'id_departamento', type: 'int', nullable: true })
+    idDepartamento!: number;
 
-    @ManyToOne(() => JornadaEntity, jornada => jornada.usuarios, { nullable: false })
-    jornada!: JornadaEntity;
+    @Column({ name: 'id_jornada', type: 'int', nullable: true })
+    idJornada!: number;
 }
 
 export default UsuarioEntity;
