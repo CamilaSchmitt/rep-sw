@@ -1,16 +1,14 @@
-# API para um Relógio Eletrônico de Ponto 
-
-## Descrição
-Este repositório apresenta o trabalho desenvolvido para a disciplina de Serviços Web (SW), com o objetivo de projetar, implementar e documentar uma API RESTful.
-
-A proposta do projeto é o desenvolvimento de uma API para um sistema de Relógio Eletrônico de Ponto (REP), permitindo a gestão eficiente de usuários, departamentos e jornadas de trabalho. A aplicação oferece funcionalidades completas de CRUD (Create, Read, Update, Delete) para essas entidades, contribuindo para a automação e organização do controle de ponto.
+# API para Relógio Eletrônico de Ponto – Microsserviços
 
 ## Tecnologias Utilizadas
-- Node.js – Ambiente de execução JavaScript para o backend.
-- Express – Framework para criação de APIs RESTful.
-- PostgreSQL – Banco de dados relacional.
-- TypeORM – ORM para facilitar o mapeamento entre objetos e tabelas.
-- Postman - Para testes.
+- Node.js – Ambiente de execução backend
+- Express – Framework para construção das APIs
+- PostgreSQL – Banco de dados relacional
+- TypeORM – ORM para abstração do banco de dados
+- Axios – Comunicação entre microsserviços
+- JWT – Autenticação baseada em tokens
+- Dotenv – Gerenciamento de variáveis de ambiente
+- Postman – Testes de API
 
 ## Instalação e Configuração
 1. Clone o repositório:
@@ -29,7 +27,7 @@ npm install
 DB_HOST=localhost
 DB_USER=user
 DB_PASSWORD=password
-DB_NAME=rep-sw-db
+DB_NAME=rep-sw-db / jornda-service-db / departamento-service-db
 DB_PORT=5432
 
 API_PORT=3002
@@ -44,50 +42,14 @@ npm run dev
 ```
 
 ## Documentação
-1. Inicie o servidor localmente:
+1. Inicie os servidores localmente:
 ```bash
 npm run dev
 ```
-2. Acesse a documentação em: `http://localhost:3002/docs`
-
-## Teste Postman
-1. Abra o Postman: `https://www.postman.com/`
-2. Importe a coleção de requisições HTTP presentes na pasta /test
-
-
-## Endpoints da API
-### Departamento
-- `GET` /departamentos: Lista todos os departamentos. 
-- `POST` /departamentos: Adiciona um novo departamento.
-- `GET` /departamentos/{id}: Recupera um departamento pelo ID.
-- `PUT` /departamentos/{id}: Atualiza um departamento pelo ID.
-- `PATCH` /departamentos/{id}: Atualiza parcialmente um departamento pelo ID.
-- `DEL` /departamentos/{id}: Deleta um departamento pelo ID.
-
-### Jornada
-- `GET` /jornadas: Lista todos os jornadas. 
-- `POST` /jornadas: Adiciona um novo jornada.
-- `GET` /jornadas/{id}: Recupera um jornada pelo ID.
-- `PUT` /jornadas/{id}: Atualiza um jornada pelo ID.
-- `PATCH` /jornadas/{id}: Atualiza parcialmente um jornada pelo ID.
-- `DEL` /jornadas/{id}: Deleta um jornada pelo ID.
-
-### Usuario
-- `GET` /usuarios: Lista todos os usuarios. 
-- `POST` /usuarios: Adiciona um novo usuario.
-- `GET` /usuarios/{id}: Recupera um usuario pelo ID.
-- `PUT` /usuarios/{id}: Atualiza um usuario pelo ID.
-- `PATCH` /usuarios/{id}: Atualiza parcialmente um usuario pelo ID.
-- `DEL` /usuarios/{id}: Deleta um usuario pelo ID.
-
-### Login
-- `POST` /login: Realiza login de um usuário.
-- `POST`/register: Realiza o registro de um usuário.
-- `POST` /logout: Realiza o logout do usuário e adiciona o accessToken atual a blacklist.
-- `POST` /refresh: Gera um novo accessToken para o usuário.
-
-
-
+2. Acesse a documentação em: 
+API Principal - `http://localhost:3002/docs`
+API Jornada - `http://localhost:3003/docs`
+API Departamento - `http://localhost:3004/docs`
 
 
 
